@@ -1,0 +1,19 @@
+{
+  "name": "webar",
+  "version": "1.0.0",
+  "description": "WebAR Project",
+  "main": "./src/server.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lakusan/WebAR.git"
+  },
+  "author": "Lakusan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Lakusan/WebAR/issues"
+  },
+  "homepage": "https://github.com/Lakusan/WebAR#readme"
+}

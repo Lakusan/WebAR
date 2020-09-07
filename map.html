@@ -4,8 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>UI</title>
-  <!-- AR-Stuff -->
+  <title>UI with Map</title>
+  <!-- AR.js -->
   <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
   <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
   <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
@@ -16,118 +16,41 @@
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
     integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
     crossorigin=""></script>
-
-  <style>
-    body {
-      margin: 10px; 
-      overflow: hidden;
-    }
-    #mymap {
-      height: 200px;
-      width: 100%;
-    }
-
-    .wrapper {
-
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      grid-gap: .5em;
-    }
-
-    .wrapper>div {
-      background: #eee;
-      padding: 1em;
-    }
-
-    .wrapper>div:nth-child(odd) {
-      background: #ddd;
-    }
-
-    /* The sidebar menu */
-    .sidebar {
-      height: 0;
-      /* 100% Full-height */
-      width: 100%;
-      /* 0 width - change this with JavaScript */
-      position: fixed;
-      /* Stay in place */
-      z-index: 10;
-      /* Stay on top */
-      bottom: 0;
-      left: 0;
-      background-color: #111;
-      /* Black*/
-      overflow-x: hidden;
-      /* Disable horizontal scroll */
-      overflow-y: hidden;
-      padding-top: 40px;
-      /* Place content 60px from the top */
-      transition: 0.5s;
-      /* 0.5 second transition effect to slide in the sidebar */
-    }
-
-    /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
-    #main {
-      transition: margin-left .5s;
-      /* If you want a transition effect */
-      padding: 20px;
-    }
-
-    /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
-    @media screen and (max-height: 450px) {
-      .sidebar {
-        padding-top: 15px;
-      }
-
-      .sidebar a {
-        font-size: 18px;
-      }
-    }
-
-    .menuFontStyle {
-      color: white;
-    }
-  </style>
+  <!-- fontawesome - icons  -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Orbitron from googlefonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@800&display=swap" rel="stylesheet">
+  <!-- custom styles -->
+  <link rel="stylesheet" type="text/css" href="styles/ui.css">
 
 </head>
 
 <body>
-  <a-scene
-  vr-mode-ui="enabled: false"
-  embedded
-  arjs="sourceType: webcam; debugUIEnabled: false;"
->
-  <a-text
-    value="This content will always face you."
-    look-at="[gps-camera]"
-    scale="120 120 120"
-    gps-entity-place="latitude: <add-your-latitude>; longitude: <add-your-longitude>;"
-  ></a-text>
-  <a-camera gps-camera rotation-reader> </a-camera>
-</a-scene>
 
-  <div class="wrapper">
+  <div class="wrapper" id="settingsMenuButtons"> 
     <div>
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minima, ea!
+      <p>Quit</p>
     </div>
     <div>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, porro!
+      <p>Settings</p>
     </div>
     <div>
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae, amet?
+      <p>Menu</p>
     </div>
+    <button id="btnSettings" onclick="toogleSettingsMenu()">Settings</button>
   </div>
   <h1>ARApp</h1>
 
 
   <div class="menu-wrapper">
     <div id="menubar">
-
       <div>Own_latitude: <span id="latitude"></span>&deg;</br></div>
       <div>Own_longitude: <span id="longitude"></span>&deg;</div>
-
     </div>
-    <div id="mySidebar" class="sidebar" onclick="toggleMenu()">
+
+
+    <div id="myBottombar" class="bottombar">
+      <button id="btnToggleMap" onclick="toggleMap()">Map</button>
       <div id="mymap"></div>
     </div>
 
@@ -152,30 +75,39 @@
       } else {
         console.log('geolocation not available');
       }
+      
+      let isMap = false;
+      let isSet = false;
 
-      function toogleMenu() {
-        let menu = doument.getElementById('menu');
-
-
-      }
-      let mySidebar = document.getElementById("mySidebar");
-      let main = document.getElementById("main");
-      let menuOpen = false;
-
-      function toggleMenu() {
-
-        if (!menuOpen) {
-          mySidebar.style.height = "200px";
-          menuOpen = true;
+      function toggleMap() {
+        let myBottombar = document.getElementById("myBottombar");
+        if (!isMap) {
+          myBottombar.style.height = "200px";
+          isMap = true;
         }
         else {
-          mySidebar.style.height = "0";
-          menuOpen = false;
+          myBottombar.style.height = "0";
+          isMap = false;
         }
+      }
+
+      function toogleSettingsMenu() {
+      let settings = document.getElementById("settingsMenuButtons");
+        if (!isSet) {
+          settings.style.top = "0px";
+          isSet = true;
+        }
+        else {
+          settings.style.top = "-100px";
+          isSet = false;
+        }
+      }
+
+      function toogleSettingsButton() {
+        
       }
 
     </script>
-
 </body>
 
 </html>
